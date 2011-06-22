@@ -72,13 +72,6 @@ describe Slacker::RSpecExt do
       @instance.sql.helpers.respond_to?(:text_file_1).should be_false
     end
 
-    specify 'and is case insensitive' do
-      @instance.sql.helpers.respond_to?(:helper_4).should be_true
-      @instance.sql.helpers.respond_to?(:hElpEr_4).should be_true
-      @instance.sql.helpers.helper_4.should == 'helpers/HELPER_4.SQL called'
-      @instance.sql.helpers.heLpEr_4.should == 'helpers/HELPER_4.SQL called'
-    end
-
     specify 'from folders other than helpers' do
       @instance.sql.respond_to?(:example_1).should be_true
       @instance.sql.example_1.respond_to?(:helper_1).should be_true
