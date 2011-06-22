@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+require 'slacker'
+require 'yaml'
+require 'slacker/command_line_formatter'
+
+def db_config_from_file(file_path)
+  dbconfig = nil
+  File.open(file_path) do |dbconfig_file|
+    dbconfig = YAML::load(dbconfig_file)
+  end
+  dbconfig
+end
+
+# Preset the application to run on the console
+Slacker.configure do |config|
+  config.console_enabled = true
+  config.formatter = Slacker::CommandLineFormatter.new($stdout)
+
+  # Setup the target connection based on the contents in database.yml
+  db_config = db_config_from_file(config.expand_path('database.yml'))
+
+  config.db_server = db_config["server"]
+  config.db_name = db_config["database"]
+  config.db_user = db_config["user"]
+  config.db_password = db_config["password"]
+end
+
+Slacker.application.run

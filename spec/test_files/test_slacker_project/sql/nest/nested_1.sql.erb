@@ -1,0 +1,2 @@
+seed <%= params[:seed] %>;
+<%= render 'nested_2.sql.erb',  {:seed => params[:seed] + 1}%>
