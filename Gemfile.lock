@@ -21,6 +21,7 @@ GEM
     ruby-odbc (0.99994)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
