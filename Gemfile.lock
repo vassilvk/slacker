@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    slacker (0.0.3)
+    slacker (0.0.4)
       bundler (~> 1.0.15)
       rspec (= 2.5.0)
       ruby-odbc (= 0.99994)
