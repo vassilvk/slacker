@@ -13,11 +13,12 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "slacker"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files = ['LICENSE', 'README.markdown', 'Rakefile', 'Gemfile', 'slacker.gemspec', 'Gemfile.lock'] + Dir.glob("{bin,lib,spec}/**/*")
+  s.test_files = Dir.glob("spec/**/*")
+  s.executables = ['slacker']
   s.require_paths = ["lib"]
 
+  s.add_dependency 'bundler', '~>1.0.15'
   s.add_dependency 'ruby-odbc', '=0.99994'
   s.add_dependency 'rspec', '=2.5.0'
 end

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'bundler/setup'
 require 'slacker'
 require 'yaml'
 require 'slacker/command_line_formatter'

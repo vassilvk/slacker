@@ -1,3 +1,4 @@
+require 'bundler/setup'
 require "slacker/version"
 require 'slacker/application'
 require 'slacker/configuration'
