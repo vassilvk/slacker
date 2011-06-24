@@ -14,6 +14,10 @@ module Slacker
       @results
     end
 
+    def results
+      @results
+    end
+
     def result(index = 1, options = {})
       # Flatten the result in case we're getting a multi-result-set response
       res = case !@results.empty? && @results[0].kind_of?(Array)

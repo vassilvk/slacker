@@ -39,6 +39,10 @@ describe Slacker::RSpecExt do
     @instance.should respond_to(:result)
   end
 
+  it 'responds to results' do
+    @instance.should respond_to(:results)
+  end
+
   it 'responds to sql' do
     @instance.should respond_to(:sql)
   end
@@ -84,37 +88,5 @@ describe Slacker::RSpecExt do
       @instance.sql.nest.example_1.respond_to?(:helper_1).should be_true
       @instance.sql.nest.example_1.helper_1.should == 'nest/example_1/helper_1.sql.erb called'
     end
-
-#    context do
-#      before(:each) do
-#        # Fake the current example in the RSpec ext
-#        @example = OpenStruct.new :metadata => {:sql => ''}
-#        @instance.stub(:example).and_return(@example)
-#      end
-#
-#      specify "with files from the current example's file folder taking priority over the helpers folder" do
-#        @example.metadata[:example_group] = {:file_path => SpecHelper.expand_test_files_path('test_slacker_project/spec/example_1.rb')}
-#        @instance.sql.respond_to?(:helper_1).should be_true
-#        @instance.sql.helper_1.should == 'example_1/helper_1.sql called'
-#      end
-#
-#      specify "in example group giving priority to SQL files over SQL.ERB files" do
-#        @example.metadata[:example_group] = {:file_path => SpecHelper.expand_test_files_path('test_slacker_project/spec/example_1.rb')}
-#        @instance.sql.respond_to?(:helper_2).should be_true
-#        @instance.sql.helper_2.should == 'example_1/helper_2.sql called'
-#      end
-#
-#      specify "works with deeply nested example files reflecting their location in the lookup of SQL files in the SQL folder" do
-#        @example.metadata[:example_group] = {:file_path => SpecHelper.expand_test_files_path('test_slacker_project/spec/nest/example_1.rb')}
-#        @instance.sql.respond_to?(:helper_1).should be_true
-#        @instance.sql.helper_1.should == 'nest/example_1/helper_1.sql.erb called'
-#      end
-#
-#      specify "falls back to the global helper when there is no matching file in the example folder" do
-#        @example.metadata[:example_group] = {:file_path => SpecHelper.expand_test_files_path('test_slacker_project/spec/example_1.rb')}
-#        @instance.sql.respond_to?(:helper_3).should be_true
-#        @instance.sql.helper_3.should == 'helpers/helper_3.sql called'
-#      end
-#    end
   end
 end

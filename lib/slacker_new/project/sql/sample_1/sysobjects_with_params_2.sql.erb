@@ -1,0 +1,5 @@
+<%# Query sysobjects by a dynamic criteria depending on the presence of parameters %>
+select * from sysobjects
+where 1 = 1
+<%= options[:xtype].nil? ? '' : " and xtype = '#{options[:xtype]}'" %>
+<%= options[:name].nil? ? '' : " and name = '#{options[:name]}'" %>;

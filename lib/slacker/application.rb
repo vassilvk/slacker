@@ -125,7 +125,11 @@ EOF
         a['TDS_Version'] = '7.0' #Used by the linux driver
       end
 
-      @database.drvconnect(drv)
+      begin
+        @database.drvconnect(drv)
+      rescue ODBC::Error => e
+        throw_error("#{e.class}: #{e.message}")
+      end
     end
 
     # Run a script against the currently configured database

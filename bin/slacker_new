@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+require 'fileutils'
+
+def usage
+<<END
+Use slacker_new to create a new Slacker project:
+
+slacker_new <project_name>
+END
+end
+
+def project_template_path
+  File.expand_path("#{File.dirname(__FILE__)}/../lib/slacker_new/project")
+end
+
+def slacker_new(project_name)
+  files = Dir.glob("#{project_template_path}/**")
+  FileUtils.mkdir(project_name) unless File.exist?(project_name)
+  FileUtils.cp_r(files, project_name)
+end
+
+def project_template_files(project_name)
+  files = Dir.glob("#{project_template_path}/**/*").map{|file| file.gsub(/^#{Regexp.escape(project_template_path)}\//, "./#{project_name}/")}
+end
+
+if ARGV.count != 1
+  puts usage
+else
+  project_name = ARGV[0]
+  puts "Creating project #{project_name}..."
+  slacker_new(project_name)
+  puts project_template_files(project_name)
+end

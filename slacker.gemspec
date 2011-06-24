@@ -13,9 +13,9 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "slacker"
 
-  s.files = ['LICENSE', 'README.markdown', 'Rakefile', 'Gemfile', 'slacker.gemspec', 'Gemfile.lock'] + Dir.glob("{bin,lib,spec}/**/*")
+  s.files = ['README.markdown', 'Rakefile', 'Gemfile', 'slacker.gemspec', 'Gemfile.lock'] + Dir.glob("{bin,lib,spec}/**/*")
   s.test_files = Dir.glob("spec/**/*")
-  s.executables = ['slacker']
+  s.executables = ['slacker', 'slacker_new']
   s.require_paths = ["lib"]
 
   s.required_ruby_version = '>= 1.9.2'

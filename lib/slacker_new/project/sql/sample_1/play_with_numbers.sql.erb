@@ -1,0 +1,16 @@
+declare @x int;
+declare @y int;
+
+set @x = <%= options[:x]%>;
+set @y = <%= options[:y]%>;
+
+-- Return just the product of @x and @y
+select @x * @y [product] union all
+select 12;
+
+-- Return the numbers and their sum
+select @x x, @y y, @x + @y [sum];
+
+-- Get the two numbers in one column and their sum with 32 in another
+select @x p, @x + 32 s union all
+select @y p, @y + 32 s;

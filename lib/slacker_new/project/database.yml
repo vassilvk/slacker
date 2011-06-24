@@ -1,0 +1,9 @@
+# Database connection
+# When Slacker is executed, it will attempt to connect to this database
+
+# Replace the following with your connection information
+# Note that at this point Slacker only works with SQL Server authentication
+server: my_server
+database: my_database
+user: user_name
+password: password
