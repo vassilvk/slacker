@@ -9,7 +9,8 @@ __Slacker__ is a Ruby (RSpec-based) framework for developing automated tests for
 
 ## Requirements
 
-__Slacker__ requires Ruby 1.9.2 running on Windows or Linux.
+__Slacker__ requires Ruby 1.9.2
+Runs on Windows and Linux.
 
 Before installing __Slacker__ on Windows, you need to install the [Ruby Windows Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (__ruby-odbc__ contains native extensions).
 
