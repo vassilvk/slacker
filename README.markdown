@@ -7,13 +7,16 @@ __Slacker__ is a Ruby (RSpec-based) framework for developing automated tests for
 # Install
     gem install slacker
 
-__Slacker__ automatically installs the following gems:
+The following gems are installed automatically:
 
 * rspec 2.5.0
 * ruby-odbc 0.99994
 
-__Slacker__ runs on Windows and Linux.<br/>
-Before installing __Slacker__ on Windows, you need to install the Windows DevKit (ruby-odbc contains native extensions).
+## Requirements
+
+__Slacker__ requires Ruby 1.9.2 running on Windows or Linux.
+
+Before installing __Slacker__ on Windows, you need to install the Windows DevKit (__ruby-odbc__ contains native extensions).
 
 # Documentation TODO
 
