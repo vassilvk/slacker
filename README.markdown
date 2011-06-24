@@ -4,19 +4,37 @@ Behavior Driven Development for SQL Server
 # Description
 __Slacker__ is a Ruby (RSpec-based) framework for developing automated tests for SQL Server programmable objects such as stored procedures and scalar/table functions.
 
-# Install
+# Installation
     gem install slacker
-
-The following gems are installed automatically:
-
-* rspec 2.5.0
-* ruby-odbc 0.99994
 
 ## Requirements
 
 __Slacker__ requires Ruby 1.9.2 running on Windows or Linux.
 
 Before installing __Slacker__ on Windows, you need to install the [Ruby Windows Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (__ruby-odbc__ contains native extensions).
+
+# Usage
+To create a __Slacker__ project, run the following command:
+
+    slacker_new my_project
+
+This will create a directory `my_project` in your current directory and will populate it with the files of a  __Slacker__ project scaffold.
+
+Navigate to your new project directory and modify file `database.yml` to tell __Slacker__ which database it should connect to.
+
+Then while in your project directory run __Slacker__:
+
+    slacker
+
+If all is good, you should see something like this:
+
+    my_database (my_server)
+    .....
+
+    Finished in 0.05222 seconds
+    5 examples, 0 failures
+
+Next, check out sample file `my_project\spec\sample_1.rb` to see the BDD specification you just executed.
 
 # Documentation TODO
 
