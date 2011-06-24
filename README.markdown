@@ -15,9 +15,11 @@ __Slacker__ automatically installs the following gems:
 __Slacker__ runs on Windows and Linux.<br/>
 Before installing __Slacker__ on Windows, you need to install the Windows DevKit (ruby-odbc contains native extensions).
 
-# TODOs
+# Documentation TODO
 
-* Describe Slacker project
+Document the following features:
+
+* Slacker project
  * Project structure
  * Configuration
 * Running Slacker
