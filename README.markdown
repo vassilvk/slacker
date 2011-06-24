@@ -16,7 +16,7 @@ The following gems are installed automatically:
 
 __Slacker__ requires Ruby 1.9.2 running on Windows or Linux.
 
-Before installing __Slacker__ on Windows, you need to install the Windows DevKit (__ruby-odbc__ contains native extensions).
+Before installing __Slacker__ on Windows, you need to install the [Ruby Windows Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (__ruby-odbc__ contains native extensions).
 
 # Documentation TODO
 
