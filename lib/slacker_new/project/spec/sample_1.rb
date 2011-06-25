@@ -75,4 +75,32 @@ describe 'My database' do
       third_resultset[1][:s].should == 44
     end
   end
+
+  # The results of a query can also be compared against the contents
+  # of a CSV file located in the data folder - see file data/sample_1/numbers_expected_output.csv
+  it 'can play with numbers (take two)' do
+    sql.sample_1.play_with_numbers(:x => 10, :y => 34) do
+      results[2].should match('sample_1/numbers_expected_output.csv')
+    end
+  end
+
+  # CSV files can be used to load data directly into a table.
+  # In this example, we will create a table, populate it with data,
+  # execute standard deviation calculation and verify the results against
+  # an expected result stored in a CSV file.
+  it 'can play with numbers (take three)' do
+    # Create the table - see file sql/sample_1/create_my_table.sql.erb
+    sql.sample_1.create_my_table
+    # We can populate any table by calling method "load_csv".
+    # As a first parameter we will pass the name of the CSV file which contains the source data;
+    # The file name is relative to the data folder - see file data/sample_1/my_table_initial_data.csv.
+    # The name of the destination table goes into the second parameter.
+    load_csv 'sample_1/my_table_initial_data.csv', 'MyTable'
+
+    # Now let's test the system scalar function Power.
+    # We will use it in a query expression executed agaings MyTable and we
+    # will compare the results against a CSV file - we should expect them to match.
+    # See files "sql/sample_1/my_table_on_power.sql.erb" and "data/sample_1/my_table_expected_power_results.csv"
+    sql.sample_1.my_table_on_power.should match('sample_1/my_table_expected_power_results.csv')
+  end
 end
