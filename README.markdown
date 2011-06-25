@@ -48,7 +48,7 @@ This ensures that:
 
 1. When __Slacker__ finishes its run, it leaves the database in the same exact state as it found it.
 
-2. Each example (see `sample_1.rb`) is executed isolated from the other examples.
+2. All examples (see `sample_1.rb`) are executed in isolation from each other. No example can interfere with the results of the other examples.
 
 # Documentation TODO
 
