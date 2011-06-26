@@ -86,8 +86,8 @@ describe 'My database' do
 
   # CSV files can be used to load data directly into a table.
   # In this example, we will create a table, populate it with data,
-  # execute standard deviation calculation and verify the results against
-  # an expected result stored in a CSV file.
+  # calculate the exponentiation of one column based on another column
+  # and verify the results against an expected resultset stored in a CSV file.
   it 'can play with numbers (take three)' do
     # Create the table - see file sql/sample_1/create_my_table.sql.erb
     sql.sample_1.create_my_table

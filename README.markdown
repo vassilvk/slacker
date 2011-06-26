@@ -16,7 +16,7 @@ Runs on Windows and Linux.
 Before installing __Slacker__ on Windows, you need to install the [Ruby Windows Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (__ruby-odbc__ contains native extensions).
 
 # Usage
-To create a __Slacker__ project, run the following command:
+To create a new __Slacker__ project, run the following command:
 
     slacker_new my_project
 
