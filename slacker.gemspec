@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
  
   s.add_dependency 'bundler', '~> 1.0.15'
   s.add_dependency 'ruby-odbc', '= 0.99994'
-  s.add_dependency 'rspec', '>= 2.5.0'
+  s.add_dependency 'rspec', '~> 2.5.0'
 end
