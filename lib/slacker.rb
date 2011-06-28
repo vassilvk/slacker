@@ -135,5 +135,31 @@ module Slacker
       end
       query_script(example, sql, log_name) unless sql.nil?
     end
+
+    def touch_csv(csv_file_or_object, fields, field_generators = {})
+      csv_obj = csv_file_or_object.kind_of?(String) ? get_csv(csv_file_or_object) : csv_file_or_object
+      fields = fields.is_a?(Array) ? fields : [fields]
+
+      # Adjust the csv if we are providing more records than there are in the csv
+      csv_row_count = csv_obj.to_a.count - 1
+
+      (fields.count - csv_row_count).times do |index|
+        csv_obj << csv_obj[index % csv_row_count].fields
+      end
+
+      # Add the field generators to the hard-coded fields
+      field_generators.each do |key, value|
+        fields.each_with_index do |record, index|
+          record[key] = value.to_s + index.to_s
+        end
+      end
+
+      fields.each_with_index do |record, index|
+        record.each do |key, value|
+          csv_obj[index][key.to_sym.downcase] = value
+        end
+      end
+      csv_obj
+    end
   end
 end

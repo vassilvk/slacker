@@ -35,12 +35,8 @@ describe Slacker::RSpecExt do
     @instance.should respond_to(:load_csv)
   end
 
-  it 'responds to result' do
-    @instance.should respond_to(:result)
-  end
-
-  it 'responds to results' do
-    @instance.should respond_to(:results)
+  it 'responds to load_csv' do
+    @instance.should respond_to(:touch_csv)
   end
 
   it 'responds to sql' do
