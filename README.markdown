@@ -15,7 +15,7 @@ Runs on Windows and Linux.
 
 Before installing __Slacker__ on Windows, you need to install the [Ruby Windows Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (__ruby-odbc__ contains native extensions).
 
-# Usage
+# Getting Started
 To create a new __Slacker__ project, run the following command:
 
     slacker_new my_project
@@ -50,20 +50,10 @@ This ensures that:
 
 2. All examples (see `sample_1.rb`) are executed in isolation from each other. No example can interfere with the results of any of the other examples.
 
-# Documentation TODO
 
-Document the following features:
+# Documentation
 
-* Slacker project
- * Project structure
- * Configuration
-* Running Slacker
-* DSL
-* SQL Templates
-* Data Fixtures
-* Test Matrices
-* Generated SQL
-* Debugging
+* [__Slacker Wiki__](https://github.com/vassilvk/slacker/wiki)
 
 
 # LICENSE
