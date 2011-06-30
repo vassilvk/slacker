@@ -1,6 +1,8 @@
 require 'csv'
 
 module Slacker
+  DATE_FORMAT = "%m/%d/%Y"
+
   class QueryResultMatcher
     def initialize(golden_master)
       @golden_master = golden_master
@@ -94,8 +96,15 @@ module Slacker
     def match_values?(master_val, subject_val)
       if master_val.nil?
         master_val == subject_val
-      elsif subject_val.kind_of?(Time) && master_val.kind_of?(String)
-        Time.parse(master_val) == subject_val
+      elsif master_val.kind_of?(String)
+        case subject_val
+        when ODBC::TimeStamp
+          (!!Time.strptime(master_val, DATE_FORMAT) rescue false) && Time.strptime(master_val, DATE_FORMAT) == ODBC::to_time(subject_val)
+        when Float
+          (!!Float(master_val) rescue false) && Float(master_val) == subject_val
+        else
+          subject_val.to_s == master_val.to_s
+        end
       else
         subject_val.to_s == master_val.to_s
       end

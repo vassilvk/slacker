@@ -1,6 +1,7 @@
 require 'slacker'
 require 'spec_helper'
 require 'time'
+require 'odbc'
 
 describe Slacker::QueryResultMatcher do
   def deep_copy(obj)
@@ -9,7 +10,7 @@ describe Slacker::QueryResultMatcher do
 
   before(:each) do
     @subject = [{'Field 1' => 12, 'Field_2' => nil, 'b' => ''},
-      {'Field 1' => 'test string', 'Field_2' => Time.parse('1/1/2011'), 'b' => 8.9}]
+      {'Field 1' => 'test string', 'Field_2' => ODBC::TimeStamp.new('2011-01-30'), 'b' => 8.9}]
   end
 
   shared_examples_for 'table-based matcher' do
