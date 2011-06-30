@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Slacker::VERSION
   s.authors     = ["Vassil Kovatchev"]
   s.email       = ["vassil.kovatchev@gmail.com"]
-  s.homepage    = "https://github.com/vassilvk/slacker"
+  s.homepage    = "https://github.com/vassilvk/slacker/wiki"
   s.summary     = %q{Behavior Driven Development for SQL Server}
-  s.description = %q{RSpec-based framework for developing automated tests for SQL Server programmable objects such as stored procedures and scalar/table functions}
+  s.description = %q{RSpec-based framework for developing automated tests for SQL Server}
 
   s.rubyforge_project = "slacker"
 

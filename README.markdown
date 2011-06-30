@@ -2,29 +2,29 @@
 Behavior Driven Development for SQL Server
 
 # Description
-__Slacker__ is a Ruby (RSpec-based) framework for developing automated tests for SQL Server programmable objects such as stored procedures and scalar/table functions.
+Slacker is a Ruby (RSpec-based) framework for developing automated tests for SQL Server programmable objects such as stored procedures and scalar/table functions.
 
 # Installation
     gem install slacker
 
-## Requirements
+### Requirements
 
-__Slacker__ requires Ruby 1.9.2.
+* Ruby 1.9.2.
 
 Runs on Windows and Linux.
 
-Before installing __Slacker__ on Windows, you need to install the [Ruby Windows Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (__ruby-odbc__ contains native extensions).
+_Note_: Before installing on Windows, you need to install the [Ruby Windows Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit).
 
-# Getting Started
-To create a new __Slacker__ project, run the following command:
+# Quick Start
+To create a new Slacker project, run the following command:
 
     slacker_new my_project
 
-This will create a directory `my_project` in your current directory and will populate it with the files of a  __Slacker__ project scaffold.
+This will create a new project directory `my_project`.
 
-Navigate to your new project directory and modify file `database.yml` to tell __Slacker__ which database it should connect to.
+Navigate to the new project directory and modify file `database.yml` to tell Slacker which database to connect to.
 
-Then while in your project directory run __Slacker__:
+Run Slacker:
 
     slacker
 
@@ -34,26 +34,16 @@ If all is good, you should see something like this:
     .....
 
     Finished in 0.05222 seconds
-    5 examples, 0 failures
+    7 examples, 0 failures
 
 Next, check out sample file `my_project\spec\sample_1.rb` to see the BDD specification you just executed.
 
-Also take a look at the SQL files generated in folder `my_project\debug\passed_examples`. Those are the actual scripts __Slacker__ generated and executed against your database.
+Also take a look at the SQL files generated in folder `my_project\debug\passed_examples`. Those are the actual SQL scripts Slacker generated and executed against your database.
 
-Pop any of these scripts into SQL Server Management Studio and run to see the actual results received by __Slacker__.
+# Resources
 
-Note that all the scripts are executed in their own transaction which is rolled back at the end.
-
-This ensures that:
-
-1. When __Slacker__ finishes its run, it leaves the database in the same exact state as it found it.
-
-2. All examples (see `sample_1.rb`) are executed in isolation from each other. No example can interfere with the results of any of the other examples.
-
-
-# Documentation
-
-* [__Slacker Wiki__](https://github.com/vassilvk/slacker/wiki)
+* [__Documentation__](https://github.com/vassilvk/slacker/wiki)
+* [__Mailing List__](https://groups.google.com/forum/#!forum/ruby_slacker)
 
 
 # LICENSE
