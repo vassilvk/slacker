@@ -34,7 +34,7 @@ If all is good, you should see something like this:
     .....
 
     Finished in 0.05222 seconds
-    7 examples, 0 failures
+    5 examples, 0 failures
 
 Next, check out sample file `my_project\spec\sample_1.rb` to see the BDD specification you just executed.
 
