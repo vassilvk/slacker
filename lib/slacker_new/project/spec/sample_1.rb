@@ -50,7 +50,7 @@ describe 'My database' do
   # In this example, we will create a table, populate it with data,
   # calculate the exponentiation of one column based on another column
   # and verify the results against an expected resultset stored in a CSV file.
-  it 'can play with numbers (take three)' do
+  it 'can play with numbers (take two)' do
     # Create the table - see file "sql/sample_1/create_my_table.sql.erb".
     sql.sample_1.create_my_table
     # We can populate any table with data from the "data" folder by calling method "load_csv".
