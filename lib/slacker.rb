@@ -119,7 +119,7 @@ module Slacker
     # Run a SQL query against an example
     def query_script(example, sql, log_name=nil)
       log_name ||= 'Run SQL Script'
-      example.metadata[:sql] += ((example.metadata[:sql] == '' ? '' : "\n\n") + "-- #{log_name}\n#{sql}")
+      example.metadata[:sql] += ((example.metadata[:sql] == '' ? '' : "\n\n") + "-- #{log_name.split(/\r\n|\n/).join("\n-- ")}\n#{sql}")
       application.query_script(sql)
     end
 
