@@ -105,9 +105,11 @@ EOF
       Dir.new(helpers_dir).each do |file_name|
         if file_name =~ /\.rb$/
           require file_name
+          module_class = Slacker::StringHelper.constantize(Slacker::StringHelper.camelize(file_name.gsub(/\.rb$/,'')))
           RSpec.configure do |config|
-            config.include(Slacker::StringHelper.constantize(Slacker::StringHelper.camelize(file_name.gsub(/\.rb$/,''))))
+            config.include(module_class)
           end
+          Slacker.mixin_module(module_class)
         end
       end
     end

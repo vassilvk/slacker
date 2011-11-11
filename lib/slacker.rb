@@ -161,5 +161,10 @@ module Slacker
       end
       csv_obj
     end
+    
+    def mixin_module(module_class)
+      extend module_class
+    end
+    
   end
 end
