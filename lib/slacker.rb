@@ -4,6 +4,7 @@ require 'slacker/application'
 require 'slacker/configuration'
 require 'slacker/sql'
 require 'slacker/formatter'
+require 'slacker/sql_preprocessor'
 require 'csv'
 require 'erb'
 
@@ -119,8 +120,12 @@ module Slacker
     # Run a SQL query against an example
     def query_script(example, sql, log_name=nil)
       log_name ||= 'Run SQL Script'
-      example.metadata[:sql] += ((example.metadata[:sql] == '' ? '' : "\n\n") + "-- #{log_name.split(/\r\n|\n/).join("\n-- ")}\n#{sql}")
-      application.query_script(sql)
+
+      debuggable_sql = SqlPreprocessor.debuggable_sql(sql)
+      executable_sql = SqlPreprocessor.executable_sql(sql, example)
+
+      example.metadata[:sql] += ((example.metadata[:sql] == '' ? '' : "\n\n") + "-- #{log_name.split(/\r\n|\n/).join("\n-- ")}\n#{debuggable_sql}")
+      application.query_script(executable_sql)
     end
 
     def load_csv(example, csv, table_name, log_name = nil)
