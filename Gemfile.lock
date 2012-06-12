@@ -1,23 +1,23 @@
 PATH
   remote: .
   specs:
-    slacker (1.0.7)
-      bundler (~> 1.0.15)
-      rspec (~> 2.5.0)
+    slacker (1.0.8)
+      bundler (>= 1.0.15)
+      rspec (>= 2.5.0)
       ruby-odbc (= 0.99994)
 
 GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.3)
-    rspec (2.5.0)
-      rspec-core (~> 2.5.0)
-      rspec-expectations (~> 2.5.0)
-      rspec-mocks (~> 2.5.0)
-    rspec-core (2.5.2)
-    rspec-expectations (2.5.0)
-      diff-lcs (~> 1.1.2)
-    rspec-mocks (2.5.0)
+    rspec (2.10.0)
+      rspec-core (~> 2.10.0)
+      rspec-expectations (~> 2.10.0)
+      rspec-mocks (~> 2.10.0)
+    rspec-core (2.10.1)
+    rspec-expectations (2.10.0)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.10.1)
     ruby-odbc (0.99994)
 
 PLATFORMS
