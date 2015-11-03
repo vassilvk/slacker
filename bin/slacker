@@ -2,7 +2,7 @@
 require 'bundler/setup'
 require 'slacker'
 require 'yaml'
-require 'slacker/command_line_formatter'
+require 'slacker/command_line_formatter2'
 
 def db_config_from_file(file_path)
   dbconfig = nil
@@ -15,7 +15,6 @@ end
 # Preset the application to run on the console
 Slacker.configure do |config|
   config.console_enabled = true
-  config.formatter = Slacker::CommandLineFormatter.new($stdout)
 
   # Setup the target connection based on the contents in database.yml
   db_config = db_config_from_file(config.expand_path('database.yml'))

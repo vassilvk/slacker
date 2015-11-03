@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/vassilvk/slacker/wiki"
   s.summary     = %q{Behavior Driven Development for SQL Server}
   s.description = %q{RSpec-based framework for developing automated tests for SQL Server}
+  s.license = 'MIT'
 
   s.rubyforge_project = "slacker"
 
@@ -20,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
  
-  s.add_dependency 'bundler', '~> 1.0.15'
+  s.add_dependency 'bundler', '~> 1.0', '>= 1.0.15'
   s.add_dependency 'ruby-odbc', '= 0.99994'
-  s.add_dependency 'rspec', '~> 2.10.0'
+  s.add_dependency 'rspec', '~> 3.0'
 end

@@ -23,7 +23,7 @@ module Slacker
       does_match
     end
 
-    def failure_message_for_should
+    def failure_message
       @failure_message
     end
 

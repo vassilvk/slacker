@@ -169,6 +169,11 @@ EOF
       RSpec.slacker_reset
 
       RSpec.configure do |config|
+        
+        # Expose the current example to the ExampleGroup extension
+        # This is necessary in order to have this work with RSpec 3
+        config.expose_current_running_example_as :example
+        
         # Global "before" hooks to begin a transaction
         config.before(:each) do
           before_proc.call(example)
@@ -186,8 +191,8 @@ EOF
         config.output_stream = @configuration.output_stream
         config.error_stream = @configuration.error_stream
 
-        config.formatters << @configuration.formatter unless @configuration.formatter.nil?
-      end
+        config.add_formatter(Slacker::CommandLineFormatter2)
+     end
     end
 
     # Tests the current folder's structure
