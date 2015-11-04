@@ -22,6 +22,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.2'
  
   s.add_dependency 'bundler', '~> 1.0', '>= 1.0.15'
-  s.add_dependency 'ruby-odbc', '= 0.99994'
+  s.add_dependency 'ruby-odbc', '= 0.99997'
   s.add_dependency 'rspec', '~> 3.0'
 end
