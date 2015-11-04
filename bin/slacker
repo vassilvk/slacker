@@ -2,7 +2,7 @@
 require 'bundler/setup'
 require 'slacker'
 require 'yaml'
-require 'slacker/command_line_formatter2'
+require 'slacker/command_line_formatter'
 
 def db_config_from_file(file_path)
   dbconfig = nil
