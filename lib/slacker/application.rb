@@ -44,7 +44,7 @@ EOF
           cleanup_folders
           configure
           run_rspec
-          false #Return false to error
+          false # Return false to be stored in error (effectively indicating no error).
         end
       ensure
         cleanup_after_run
@@ -55,6 +55,9 @@ EOF
       else
         raise @error_message if error
       end
+
+      # Return true if no error occurred, otherwise false.
+      !error
     end
 
     def run_rspec
