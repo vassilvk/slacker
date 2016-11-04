@@ -162,7 +162,7 @@ EOF
       end
 
       after_proc = lambda do |example|
-        Slacker.query_script(example, 'rollback transaction;', 'Rollback the changes made by the example script')
+        Slacker.query_script(example, 'if @@trancount > 0 rollback transaction;', 'Rollback the changes made by the example script')
       end
 
       # Reset RSpec through a monkey-patched method
