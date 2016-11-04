@@ -25,4 +25,8 @@ Slacker.configure do |config|
   config.db_password = db_config["password"]
 end
 
-Slacker.application.run
+if Slacker.application.run
+  exit(0)
+else
+  exit(1)
+end
