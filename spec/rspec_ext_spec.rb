@@ -49,39 +49,39 @@ describe Slacker::RSpecExt do
     end
 
     specify 'described as SQL files found in the sql/helpers folder' do
-      @instance.sql.respond_to?(:helpers).should be_true
-      @instance.sql.helpers.respond_to?(:helper_1).should be_true
+      @instance.sql.respond_to?(:helpers).should be true
+      @instance.sql.helpers.respond_to?(:helper_1).should be true
       @instance.sql.helpers.helper_1.should == 'helpers/helper_1.sql called'
     end
 
     specify 'described as SQL.ERB files found in the sql/helpers folder' do
-      @instance.sql.helpers.respond_to?(:helper_2).should be_true
+      @instance.sql.helpers.respond_to?(:helper_2).should be true
       @instance.sql.helpers.helper_2.should == 'helpers/helper_2.sql.erb called'
     end
 
     specify 'with SQL files taking priority over SQL.ERB files' do
-      @instance.sql.helpers.respond_to?(:helper_3).should be_true
+      @instance.sql.helpers.respond_to?(:helper_3).should be true
       @instance.sql.helpers.helper_3.should == 'helpers/helper_3.sql called'
     end
 
     specify 'but ignores non-existing methods' do
-      @instance.sql.helpers.respond_to?(:some_bogus_method).should be_false
+      @instance.sql.helpers.respond_to?(:some_bogus_method).should be false
     end
 
     specify 'but ignores files which are not with SQL or SQL.ERB extension' do
-      @instance.sql.helpers.respond_to?(:text_file_1).should be_false
+      @instance.sql.helpers.respond_to?(:text_file_1).should be false
     end
 
     specify 'from folders other than helpers' do
-      @instance.sql.respond_to?(:example_1).should be_true
-      @instance.sql.example_1.respond_to?(:helper_1).should be_true
+      @instance.sql.respond_to?(:example_1).should be true
+      @instance.sql.example_1.respond_to?(:helper_1).should be true
       @instance.sql.example_1.helper_1.should == 'example_1/helper_1.sql called'
     end
 
     specify "works with deeply nested example files reflecting their location in the lookup of SQL files in the SQL folder" do
-      @instance.sql.respond_to?(:nest).should be_true
-      @instance.sql.nest.respond_to?(:example_1).should be_true
-      @instance.sql.nest.example_1.respond_to?(:helper_1).should be_true
+      @instance.sql.respond_to?(:nest).should be true
+      @instance.sql.nest.respond_to?(:example_1).should be true
+      @instance.sql.nest.example_1.respond_to?(:helper_1).should be true
       @instance.sql.nest.example_1.helper_1.should == 'nest/example_1/helper_1.sql.erb called'
     end
   end
