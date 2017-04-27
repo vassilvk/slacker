@@ -90,7 +90,12 @@ module Slacker
     end
 
     def get_csv(csv_file_path)
-      CSV.read(configuration.expand_path("data/#{csv_file_path}"), {:headers => true, :encoding => 'Windows-1252', :header_converters => :symbol})
+      CSV.read(configuration.expand_path("data/#{csv_file_path}"), {
+          :headers => true,
+          :encoding => 'Windows-1252',
+          :header_converters => lambda { |h| h.to_sym unless h.nil? }
+      })
+
     end
 
     def hash_array_to_csv(raw_array)
