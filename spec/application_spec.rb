@@ -9,6 +9,6 @@ describe Slacker::Application do
     app = Slacker.application
     app.should respond_to(:target_folder_structure)
     folder_struct = app.target_folder_structure
-    folder_struct.should == ['data', 'debug', 'debug/passed_examples', 'debug/failed_examples', 'sql', 'spec', 'lib', 'lib/helpers']
+    folder_struct.should == ['data', 'debug/passed_examples', 'debug/failed_examples', 'sql', 'spec', 'lib', 'lib/helpers']
   end
 end

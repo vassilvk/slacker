@@ -1,5 +1,6 @@
 require 'logger'
 require 'rspec/core'
+require 'fileutils'
 require 'slacker/rspec_monkey'
 require 'slacker/rspec_ext'
 require 'slacker/string_helper'
@@ -7,7 +8,7 @@ require 'odbc'
 
 module Slacker
   class Application
-    attr_reader :target_folder_structure
+    attr_reader :target_folder_structure, :temp_folders
 
     SQL_OPTIONS = <<EOF
 set textsize 2147483647;
@@ -26,7 +27,8 @@ EOF
 
     def initialize(configuration)
       @configuration = configuration
-      @target_folder_structure = ['data', 'debug', 'debug/passed_examples', 'debug/failed_examples', 'sql', 'spec', 'lib', 'lib/helpers']
+      @temp_folders = ['debug/passed_examples', 'debug/failed_examples']
+      @target_folder_structure = ['data', 'debug/passed_examples', 'debug/failed_examples', 'sql', 'spec', 'lib', 'lib/helpers']
       @error_message = ''
       @database = ODBC::Database.new
     end
@@ -40,6 +42,7 @@ EOF
       begin
         error = catch :error_exit do
           print_connection_message
+          create_temp_folders
           test_folder_structure
           cleanup_folders
           configure
@@ -204,6 +207,13 @@ EOF
         if !File.directory?(get_path(dir))
           throw_error("Cannot find directory \"#{get_path(dir)}\"")
         end
+      end
+    end
+
+    # Create temporary folders if they don't exist
+    def create_temp_folders()
+      temp_folders.each do |dir|
+        FileUtils.mkdir_p(dir)
       end
     end
 

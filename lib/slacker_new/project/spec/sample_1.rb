@@ -3,20 +3,20 @@ describe 'My database' do
   # Simple inline query example.
   it 'contains system tables' do
     # Make sure we have at least one system object in the database.
-    query("select * from sysobjects where xtype = 'S';").count.should > 0
+    expect(query("select * from sysobjects where xtype = 'S';").count).to be > 0
   end
 
   # The same query, this time using a SQL template stored in file "sql/sample_1/sysobject.sql.erb".
   it 'contains system tables (take two)' do
     # Every (*.sql.erb) file in folder "sql" can be called as a method on object "sql".
     # Subfolders of folder "sql" appear as children of object "sql" with their (*.sql.erb) files automatically available as methods.
-    sql.sample_1.sysobjects.count.should > 0
+    expect(sql.sample_1.sysobjects.count).to be > 0
   end
 
   # This time we'll use a parameterized template.
   it 'contains system tables (take three)' do
     # Every template can accept parameters; see file "sql/sample_1/sysobject_with_params.sql.erb".
-    sql.sample_1.sysobjects_with_params(:xtype => 'S').count.should > 0
+    expect(sql.sample_1.sysobjects_with_params(:xtype => 'S').count).to be > 0
   end
 
   # SQL Templates can contain multiple statements and can return multiple resultsets.
@@ -27,19 +27,19 @@ describe 'My database' do
       # A resultset contains an array of records. Each record is a hash of field => value pairs.
       
       # First resultset; First record; Column "product".
-      results[0][0][:product].should == 24
+      expect(results[0][0][:product]).to be == 24
 
       # A resultset can be matched directly against an array of hashes using method "match".
-      results[1].should match([{:x => 2, :y => 12, :sum => 14}])
+      expect(results[1]).to match([{:x => 2, :y => 12, :sum => 14}])
 
       # Or against a CSV file stored in project's "data" folder (see file "data/sample_1/numbers_expected_output.csv").
-      results[2].should match('sample_1/numbers_expected_output.csv')
+      expect(results[2]).to match('sample_1/numbers_expected_output.csv')
 
       # A resultset's values can be matched one-by-one.
-      results[2][0][:p].should == 2
-      results[2][0][:s].should == 34
-      results[2][1][:p].should == 12
-      results[2][1][:s].should == 44
+      expect(results[2][0][:p]).to be == 2
+      expect(results[2][0][:s]).to be == 34
+      expect(results[2][1][:p]).to be == 12
+      expect(results[2][1][:s]).to be == 44
     end
   end
 
@@ -61,6 +61,6 @@ describe 'My database' do
     # We will use it in a query expression executed agaings MyTable and we
     # will compare the results against a CSV file - we should expect them to match.
     # See files "sql/sample_1/my_table_on_power.sql.erb" and "data/sample_1/my_table_expected_power_results.csv".
-    sql.sample_1.my_table_on_power.should match('sample_1/my_table_expected_power_results.csv')
+    expect(sql.sample_1.my_table_on_power).to match('sample_1/my_table_expected_power_results.csv')
   end
 end
