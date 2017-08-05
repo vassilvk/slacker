@@ -23,6 +23,8 @@ Slacker.configure do |config|
   config.db_name = db_config["database"]
   config.db_user = db_config["user"]
   config.db_password = db_config["password"]
+  config.db_port = db_config["port"]
+  config.db_driver = db_config["driver"]
 end
 
 if Slacker.application.run

@@ -3,7 +3,12 @@
 
 # Replace the following with your connection information.
 # Note that at this point Slacker only works with SQL Server authentication.
+
+# Slacker supports odbc and tiny_tds drivers
+
 server: my_server
 database: my_database
 user: user_name
 password: password
+port: 1433
+driver: odbc #or tiny_tds

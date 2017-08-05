@@ -5,6 +5,7 @@ require 'slacker/rspec_monkey'
 require 'slacker/rspec_ext'
 require 'slacker/string_helper'
 require 'odbc'
+require 'tiny_tds'
 
 module Slacker
   class Application
@@ -25,12 +26,18 @@ set ansi_nulls on;
 set concat_null_yields_null on;
 EOF
 
+    ODBC_Driver = 'odbc'
+    TINYTDS_DRIVER = 'tiny_tds'
+
     def initialize(configuration)
       @configuration = configuration
       @temp_folders = ['debug/passed_examples', 'debug/failed_examples']
       @target_folder_structure = ['data', 'debug/passed_examples', 'debug/failed_examples', 'sql', 'spec', 'lib', 'lib/helpers']
       @error_message = ''
-      @database = ODBC::Database.new
+      case @configuration.db_driver
+      when ODBC_Driver
+        @database = ODBC::Database.new
+      end
     end
 
     def print_connection_message
@@ -49,8 +56,8 @@ EOF
           run_rspec
           false # Return false to be stored in error (effectively indicating no error).
         end
-      ensure
-        cleanup_after_run
+        ensure
+          cleanup_after_run
       end
 
       if @configuration.console_enabled
@@ -73,13 +80,23 @@ EOF
 
     # Configure Slacker
     def configure
-      configure_db
+      case @configuration.db_driver
+      when ODBC_Driver
+        configure_db_odbc
+      when TINYTDS_DRIVER
+        configure_db_tiny_tds
+      end
       configure_rspec
       configure_misc
     end
 
     def cleanup_after_run
-      @database.disconnect if (@database && @database.connected?)
+      case @configuration.db_driver
+        when ODBC_Driver
+          @database.disconnect if (@database && @database.connected?)
+        when TINYTDS_DRIVER
+          @database.close if (@database && @database.active?)
+        end
     end
 
     def cleanup_folders
@@ -121,7 +138,7 @@ EOF
     end
 
     # Configure database connection
-    def configure_db
+    def configure_db_odbc
       drv = ODBC::Driver.new
       drv.name = 'Driver1'
       drv.attrs.tap do |a|
@@ -140,8 +157,27 @@ EOF
       end
     end
 
+    def configure_db_tiny_tds
+      begin
+        @database = TinyTds::Client.new :username => @configuration.db_user, :password => @configuration.db_password, 
+                    :host => @configuration.db_server, :database => @configuration.db_name, :port => 1433
+        @database.query_options[:symbolize_keys] = true
+      rescue TinyTds::Error => e
+        throw_error("#{e}")
+      end
+    end
+
     # Run a script against the currently configured database
     def query_script(sql)
+      case @configuration.db_driver
+      when ODBC_Driver
+        query_script_odbc(sql)
+      when TINYTDS_DRIVER
+        query_script_tiny_tds(sql)
+      end
+    end
+
+    def query_script_odbc(sql)
       results = []
       begin
         st = @database.run(sql)
@@ -152,9 +188,16 @@ EOF
             results << rows
           end
         end while(st.more_results)
-      ensure
-        st.drop unless st.nil?
+        ensure
+          st.drop unless st.nil?
       end
+    end
+
+    def query_script_tiny_tds(sql)
+      st = @database.execute(sql)
+      if st.fields  
+        results = st.each :as => :hash
+      end 
       results.count > 1 ? results : results.first
     end
 

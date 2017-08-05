@@ -2,6 +2,7 @@ require 'csv'
 
 module Slacker
   DATE_FORMAT = "%m/%d/%Y"
+  DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
   class QueryResultMatcher
     def initialize(golden_master)
@@ -102,6 +103,10 @@ module Slacker
           (!!Time.strptime(master_val, DATE_FORMAT) rescue false) && Time.strptime(master_val, DATE_FORMAT) == ODBC::to_time(subject_val)
         when Float
           (!!Float(master_val) rescue false) && Float(master_val) == subject_val
+        when BigDecimal
+          (!!BigDecimal(master_val) rescue false) && BigDecimal(master_val) == subject_val
+        when Time
+          (!!DateTime.strptime(DateTime.parse(master_val).to_s, DATETIME_FORMAT) rescue false) && DateTime.strptime(DateTime.parse(master_val).to_s, DATETIME_FORMAT) == DateTime.strptime(DateTime.parse(subject_val.to_s).to_s, DATETIME_FORMAT)
         else
           subject_val.to_s == master_val.to_s
         end
