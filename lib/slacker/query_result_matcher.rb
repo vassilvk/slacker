@@ -104,7 +104,7 @@ module Slacker
         when Float
           (!!Float(master_val) rescue false) && Float(master_val) == subject_val
         when BigDecimal
-          (!!BigDecimal(master_val) rescue false) && BigDecimal(master_val) == subject_val
+          (!!BigDecimal(master_val) rescue false) && BigDecimal(master_val) == BigDecimal(subject_val)
         when Time
           (!!DateTime.strptime(DateTime.parse(master_val).to_s, DATETIME_FORMAT) rescue false) && DateTime.strptime(DateTime.parse(master_val).to_s, DATETIME_FORMAT) == DateTime.strptime(DateTime.parse(subject_val.to_s).to_s, DATETIME_FORMAT)
         else

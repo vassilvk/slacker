@@ -81,10 +81,10 @@ EOF
     # Configure Slacker
     def configure
       case @configuration.db_driver
-      when ODBC_Driver
-        configure_db_odbc
-      when TINYTDS_DRIVER
-        configure_db_tiny_tds
+        when ODBC_Driver
+          configure_db_odbc
+        when TINYTDS_DRIVER
+          configure_db_tiny_tds
       end
       configure_rspec
       configure_misc
@@ -96,7 +96,7 @@ EOF
           @database.disconnect if (@database && @database.connected?)
         when TINYTDS_DRIVER
           @database.close if (@database && @database.active?)
-        end
+      end
     end
 
     def cleanup_folders
@@ -194,9 +194,11 @@ EOF
     end
 
     def query_script_tiny_tds(sql)
+      results = []
       st = @database.execute(sql)
       if st.fields  
-        results = st.each :as => :hash
+        rows = st.each :as => :hash
+        results << rows
       end 
       results.count > 1 ? results : results.first
     end
