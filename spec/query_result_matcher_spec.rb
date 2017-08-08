@@ -253,7 +253,7 @@ describe Slacker::QueryResultMatcher do
     it_behaves_like 'single-value-based matcher'
   end
 
-  describe 'DateTime-based golden master' do
+  describe 'DateTime2-based golden master' do
     before(:each) do
       @subject = [{'Field 1' => Time.parse('2017-01-01.000000'), 'Field_2' => 12}]
       @correct_golden_master = Time.parse('2017-01-01 00:00:00 -0800')
