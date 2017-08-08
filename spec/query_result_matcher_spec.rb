@@ -231,6 +231,17 @@ describe Slacker::QueryResultMatcher do
     it_behaves_like 'single-value-based matcher'
   end
 
+  describe 'BigDecimal point-based golden master' do
+    before(:each) do
+      @subject = [{'Field 1' => -3.12e-5, 'Field_2' => 12}]
+      @correct_golden_master = -0.0000312
+      @wrong_value_golden_master = -0.0000317
+      @wrong_type_golden_master = 15
+    end
+
+    it_behaves_like 'single-value-based matcher'
+  end
+
   describe 'Date-based golden master' do
     before(:each) do
       @subject = [{'Field 1' => Time.parse('1/1/2011'), 'Field_2' => 12}]
@@ -241,6 +252,19 @@ describe Slacker::QueryResultMatcher do
 
     it_behaves_like 'single-value-based matcher'
   end
+
+  describe 'DateTime-based golden master' do
+    before(:each) do
+      @subject = [{'Field 1' => Time.parse('2017-01-01.000000'), 'Field_2' => 12}]
+      @correct_golden_master = Time.parse('2017-01-01 00:00:00 -0800')
+      @wrong_value_golden_master = Time.parse('2017-02-01.000000')
+      @wrong_type_golden_master = 'whatever'
+    end
+
+    it_behaves_like 'single-value-based matcher'
+  end
+
+  
 
   describe 'Nil-based golden master' do
     before(:each) do
