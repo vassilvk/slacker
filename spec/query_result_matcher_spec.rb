@@ -256,7 +256,7 @@ describe Slacker::QueryResultMatcher do
   describe 'DateTime2-based golden master' do
     before(:each) do
       @subject = [{'Field 1' => Time.parse('2017-01-01.000000'), 'Field_2' => 12}]
-      @correct_golden_master = Time.parse('2017-01-01 00:00:00 -0800')
+      @correct_golden_master = Time.parse('2017-01-01 00:00:00')
       @wrong_value_golden_master = Time.parse('2017-02-01.000000')
       @wrong_type_golden_master = 'whatever'
     end

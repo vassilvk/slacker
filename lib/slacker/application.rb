@@ -26,7 +26,7 @@ set ansi_nulls on;
 set concat_null_yields_null on;
 EOF
 
-    ODBC_Driver = 'odbc'
+    ODBC_DRIVER = 'odbc'
     TINYTDS_DRIVER = 'tiny_tds'
 
     def initialize(configuration)
@@ -35,7 +35,7 @@ EOF
       @target_folder_structure = ['data', 'debug/passed_examples', 'debug/failed_examples', 'sql', 'spec', 'lib', 'lib/helpers']
       @error_message = ''
       case @configuration.db_driver
-      when ODBC_Driver
+      when ODBC_DRIVER
         @database = ODBC::Database.new
       end
     end
@@ -81,7 +81,7 @@ EOF
     # Configure Slacker
     def configure
       case @configuration.db_driver
-        when ODBC_Driver
+        when ODBC_DRIVER
           configure_db_odbc
         when TINYTDS_DRIVER
           configure_db_tiny_tds
@@ -92,7 +92,7 @@ EOF
 
     def cleanup_after_run
       case @configuration.db_driver
-        when ODBC_Driver
+        when ODBC_DRIVER
           @database.disconnect if (@database && @database.connected?)
         when TINYTDS_DRIVER
           @database.close if (@database && @database.active?)
@@ -160,7 +160,7 @@ EOF
     def configure_db_tiny_tds
       begin
         @database = TinyTds::Client.new :username => @configuration.db_user, :password => @configuration.db_password, 
-                    :host => @configuration.db_server, :database => @configuration.db_name, :port => 1433
+                    :host => @configuration.db_server, :database => @configuration.db_name, :port => @configuration.db_port
         @database.query_options[:symbolize_keys] = true
       rescue TinyTds::Error => e
         throw_error("#{e}")
@@ -170,7 +170,7 @@ EOF
     # Run a script against the currently configured database
     def query_script(sql)
       case @configuration.db_driver
-      when ODBC_Driver
+      when ODBC_DRIVER
         query_script_odbc(sql)
       when TINYTDS_DRIVER
         query_script_tiny_tds(sql)
@@ -191,6 +191,7 @@ EOF
         ensure
           st.drop unless st.nil?
       end
+      results.count > 1 ? results : results.first
     end
 
     def query_script_tiny_tds(sql)
