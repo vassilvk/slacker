@@ -13,7 +13,8 @@ module Slacker
       @db_name = nil
       @db_user = nil
       @db_password = nil
-      @db_port = nil
+      @db_port = 1433
+      @db_driver = 'odbc'
     end
 
     def expand_path(path)
