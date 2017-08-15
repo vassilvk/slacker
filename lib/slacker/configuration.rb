@@ -1,6 +1,6 @@
 module Slacker
   class Configuration
-    attr_accessor :base_dir, :error_stream, :output_stream, :formatter, :db_server, :db_name, :db_user, :db_password, :console_enabled
+    attr_accessor :base_dir, :error_stream, :output_stream, :formatter, :db_server, :db_name, :db_user, :db_password, :db_port, :db_driver, :console_enabled
 
     def initialize
       @console_enabled = true
@@ -13,6 +13,8 @@ module Slacker
       @db_name = nil
       @db_user = nil
       @db_password = nil
+      @db_port = 1433
+      @db_driver = 'odbc'
     end
 
     def expand_path(path)
