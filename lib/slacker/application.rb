@@ -159,8 +159,12 @@ EOF
 
     def configure_db_tiny_tds
       begin
-        @database = TinyTds::Client.new :username => @configuration.db_user, :password => @configuration.db_password, 
-                    :host => @configuration.db_server, :database => @configuration.db_name, :port => @configuration.db_port
+        @database = TinyTds::Client.new :username => @configuration.db_user,
+                      :password => @configuration.db_password, 
+                      :host => @configuration.db_server,
+                      :database => @configuration.db_name,
+                      :port => @configuration.db_port
+                      
         @database.query_options[:symbolize_keys] = true
       rescue TinyTds::Error => e
         throw_error("#{e}")
