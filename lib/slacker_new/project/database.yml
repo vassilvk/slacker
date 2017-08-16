@@ -4,11 +4,19 @@
 # Replace the following with your connection information.
 # Note that at this point Slacker only works with SQL Server authentication.
 
-# Slacker supports odbc and tiny_tds drivers
+# Slacker supports odbc and tiny_tds drivers.
 
-server: my_server
+# odbc or tiny_tds; defaults to odbc.
+driver: odbc
+
+# Full instance name when using odbc; hostname or IP when using tiny_tds.
+server: my_server 
+
+# Used only when driver is set to tiny_tds.
+port: 1433 
+
 database: my_database
+
+# Slacker supports only SQL Server Auth.
 user: user_name
 password: password
-port: 1433
-driver: odbc #or tiny_tds
