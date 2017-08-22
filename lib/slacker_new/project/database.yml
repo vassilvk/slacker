@@ -6,14 +6,18 @@
 driver: tiny_tds
 
 # Full instance name when using odbc; hostname or IP when using tiny_tds.
-server: my_server 
+server: localhost 
 
 # Port is used by tiny_tds only. Defaults to 1433 when not set.
 # Use server and port when targeting named instances with tiny_tds.
-port: 1433 
+port: 1433
 
+# The target database.
 database: my_database
 
 # Slacker supports only SQL Server authentication.
 user: user_name
 password: password
+
+# Set this to false when using alternative formatters such as -fh and fj.
+console_enabled: true

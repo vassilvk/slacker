@@ -1,0 +1,18 @@
+-- Fibonacci sequence generator implemented as an inline table function.
+create function dbo.tf_Fibonacci
+(
+  -- Generate a sequence up to the given threshold.
+  @threshold int
+)
+  returns table
+    return
+    with fibo (prev_n, n) as
+    (
+      select 0, 1
+      union all
+      select n, prev_n + n
+      from fibo
+      where n < @threshold
+    )
+    select prev_n as fibonacci
+    from fibo;
