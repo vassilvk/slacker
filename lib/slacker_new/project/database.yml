@@ -18,3 +18,6 @@ database: my_database
 # Slacker supports only SQL Server authentication.
 user: user_name
 password: password
+
+# Set this to false when using alternative formatters such as -fh and fj.
+console_enabled: true
