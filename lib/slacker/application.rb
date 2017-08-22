@@ -247,7 +247,7 @@ EOF
         config.output_stream = @configuration.output_stream
         config.error_stream = @configuration.error_stream
 
-        config.add_formatter(Slacker::CommandLineFormatter)
+        config.add_formatter(Slacker::CommandLineFormatter) if @configuration.console_enabled
      end
     end
 

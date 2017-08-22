@@ -23,12 +23,10 @@ Slacker.configure do |config|
   config.db_name = db_config["database"]
   config.db_user = db_config["user"]
   config.db_password = db_config["password"]
-  if !!db_config["port"] 
-    config.db_port = db_config["port"] 
-  end
-  if !!db_config["driver"] 
-    config.db_driver = db_config["driver"] 
-  end
+  config.db_port = db_config["port"] if !!db_config["port"] 
+  config.db_driver = db_config["driver"] if !!db_config["driver"] 
+  # Override console_enabled value with the value from configuration yaml
+  config.console_enabled = db_config["console_enabled"] if db_config["console_enabled"] != nil
 end
 
 if Slacker.application.run

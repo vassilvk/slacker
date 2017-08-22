@@ -27,15 +27,9 @@ module Slacker
 
     def console_enabled=(value)
       @console_enabled = value
-      if @console_enabled
-        @error_stream = $stderr
-        @output_stream = $stdout
-        @rspec_args = ARGV
-      else
-        @error_stream = nil
-        @output_stream = nil
-        @rspec_args = []
-      end
+      @error_stream = $stderr
+      @output_stream = $stdout
+      @rspec_args = ARGV
     end
 
     def rspec_args
