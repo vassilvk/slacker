@@ -31,9 +31,13 @@ module CommonHelper
     options = options_from_params(params)
     
     order_by_clause = options[:order_by] != nil ? " order by #{options[:order_by]}" : ""
-    
-    sql_value_params = params.map{|param| sql_value(param) }
-    query "select * from #{func_name}(#{sql_value_params.join(', ')})#{order_by_clause};", &block
+
+    if params.any? {|p| p.class == TableVariable}
+      sql.common.t_func :func_name => func_name, :params => params, :order_by_clause => order_by_clause, &block
+    else
+      sql_value_params = params.map{|param| sql_value(param) }
+      query "select * from #{func_name}(#{sql_value_params.join(', ')})#{order_by_clause};", &block
+    end
   end
 
   # Invoke a stored procedure with an arbitrary list of input and output

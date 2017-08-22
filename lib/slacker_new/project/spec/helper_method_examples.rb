@@ -16,7 +16,7 @@ describe 'My database' do
     sql.helper_method_examples.create_tables
   end
 
-
+  
   # An example of using helper method sproc.
   it 'is hosted on a SQL Server instance' do
     # Call sp_server_info using helper method sproc.
@@ -32,6 +32,7 @@ describe 'My database' do
   
   end
 
+  
   # Another sproc example - calling a multi-resultset stored procedures with parameters.
   it 'contains table dbo.OrderItem' do
 
@@ -52,6 +53,7 @@ describe 'My database' do
   
   end
 
+  
   # An example of using sproc with output parameters.
   it 'can be used to perform formatting operations' do
     
@@ -77,6 +79,7 @@ describe 'My database' do
 
   end
 
+  
   # An example of using sproc with named output parameters.
   it 'can be used to perform formatting operations (take 2)' do
     
@@ -101,6 +104,7 @@ describe 'My database' do
 
   end
 
+  
   # An example of using helper method s_func to call a scalar function.
   it 'exposes system scalar function COALESCE' do
     result = s_func('COALESCE', nil, 12, nil, 24)
@@ -109,16 +113,20 @@ describe 'My database' do
 
   # An example of using t_func.
   it 'exposes a dbo.tf_Fibonacci UDF table-valued function' do
-    # Create a Fibonacci sequence generator table-valued function
-    # for demonstration purposes.
+    # Create a Fibonacci sequence generator table-valued function.
+    # This is done here for demonstration purposes only.
+    # Typically you would not be creating your target logic as part of the test.
     sql.helper_method_examples.create_tf_fibonacci
+
+    # Test the Fibonacci sequence function by invoking it with a variety of parameters
+    # and matching the results with expected data points stored in CSV files.
 
     expect(t_func('dbo.tf_Fibonacci', 1000000)).to match('helper_method_examples/fibonacci_1.csv')
 
     expect(t_func('dbo.tf_Fibonacci', 3000000)).to match('helper_method_examples/fibonacci_2.csv')
 
     expect(t_func('dbo.tf_Fibonacci', 999999999)).to match('helper_method_examples/fibonacci_3.csv')
+  
   end
-
 
 end
