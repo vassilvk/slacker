@@ -1,0 +1,38 @@
+% func_name = options[:func_name]
+% params = options[:params]
+% order_by_clause = options[:order_by_clause]
+%
+
+% table_params = []
+% params.each do |param|
+%   if param.class == TableVariable
+%     table_params << param
+%   end
+% end
+%
+%
+% table_params.each do |param|
+%   tvar = param
+%   tvar.increment    # prevent declaring twice if reused
+
+DECLARE <%= tvar.name %> <%= tvar.type %>;
+%   if tvar.fields != nil && tvar.values != nil && tvar.fields.count > 0 && tvar.values.count > 0
+INSERT INTO <%= tvar.name %>
+(
+%     tvar.fields.each_with_index do |field, index|
+  <%= field %><%= index < tvar.fields.count - 1 ? ',' : '' %>
+%     end
+)
+VALUES
+%     tvar.values.each_with_index do |row, row_index|
+(
+%       row.each_with_index do |value, value_index|
+  <%= sql_value(value) %><%= value_index < row.count - 1 ? ', ' : '' %>
+%       end
+)<%= row_index < tvar.values.count - 1 ? ',' : ';' %>
+%     end
+
+%   end
+% end
+
+SELECT * FROM <%= func_name %>(<%= params.map{|param| sql_value(param) }.join(', ') %>)<%= order_by_clause %>;
