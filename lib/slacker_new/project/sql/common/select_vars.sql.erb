@@ -1,0 +1,22 @@
+% declare_vars = options[:options][:declare_vars]
+% vars = options[:vars]
+% var_count = vars.count
+% sql_script = options[:sql_script]
+%
+<% if declare_vars %>
+<%   vars.each do |var| %>
+declare @<%= var[0].to_s %> <%= var[1] %>;
+<%   end %>
+
+<% end %>
+%
+<%= sql_script.split(/\r\n/).map{|i| i.strip}.join("\r\n") %>
+<% if var_count > 0 %>
+
+
+select
+<%   vars.each_with_index do |var, index| %>
+<%     var_name = var[0].to_s %>
+  @<%= var_name %> as <%= var_name %><%= index < var_count - 1 ? ',' : ';' %>
+<%   end %>
+<% end %>

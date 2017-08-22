@@ -1,0 +1,52 @@
+% params = options[:params]
+% sproc_name = options[:sproc_name]
+% out_params = options[:out_params]
+% out_param_count = out_params.count
+% out_param_vars = out_params.merge(out_params){|k, v| v.is_a?(Hash) ? v.to_a[0][0] : k}
+%
+
+% table_params = []
+% params.each do |param|
+%   if param[1].class == TableVariable
+%     table_params << param
+%   end
+% end
+%
+%
+% table_params.each do |param|
+%   tvar = param[1]
+%   tvar.increment    # prevent declaring twice if reused
+
+DECLARE <%= tvar.name %> <%= tvar.type %>;
+%   if tvar.fields != nil && tvar.values != nil && tvar.fields.count > 0 && tvar.values.count > 0
+INSERT INTO <%= tvar.name %>
+(
+%     tvar.fields.each_with_index do |field, index|
+  <%= field %><%= index < tvar.fields.count - 1 ? ',' : '' %>
+%     end
+)
+VALUES
+%     tvar.values.each_with_index do |row, row_index|
+(
+%       row.each_with_index do |value, value_index|
+  <%= sql_value(value) %><%= value_index < row.count - 1 ? ', ' : '' %>
+%       end
+)<%= row_index < tvar.values.count - 1 ? ',' : ';' %>
+%     end
+
+%   end
+% end
+
+% out_params.each do |param|
+DECLARE @<%= out_param_vars[param[0]] %> <%= param[1].is_a?(Hash) ? param[1].to_a[0][1] : param[1] %>;
+% end
+
+EXEC <%= sproc_name %>
+<%= sproc_params(params, out_param_vars) %>;
+
+% if out_param_count > 0
+SELECT
+%   out_param_vars.each_with_index do |param, index|
+  @<%= param[1] %> as [<%= param[1] %>]<%= index < out_param_count - 1 ? ',' : ';' %>
+%   end
+% end
