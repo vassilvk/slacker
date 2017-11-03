@@ -7,7 +7,6 @@ Slacker is a transacted RSpec-based framework for developing automated tests for
 # Resources
 
 * [__Documentation__](https://github.com/vassilvk/slacker/wiki)
-* [__Mailing List__](https://groups.google.com/forum/#!forum/ruby_slacker)
 
 
 # LICENSE
