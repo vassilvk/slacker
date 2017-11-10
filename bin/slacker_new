@@ -18,10 +18,14 @@ def slacker_new(project_name)
   files = Dir.glob("#{project_template_path}/**")
   FileUtils.mkdir(project_name) unless File.exist?(project_name)
   FileUtils.cp_r(files, project_name)
+
+  # Rename file "gitignore" to ".gitignore".
+  # This is necessary because we cannot carry dotfiles with the gem, hence the file is carried as "gitignore".
+  File.rename("#{project_name}/gitignore", "#{project_name}/.gitignore")
 end
 
 def project_template_files(project_name)
-  files = Dir.glob("#{project_template_path}/**/*").map{|file| file.gsub(/^#{Regexp.escape(project_template_path)}\//, "./#{project_name}/")}
+  files = Dir.glob("#{project_name}/**/*").map{|file| file.gsub(/^#{Regexp.escape(project_template_path)}\//, "./#{project_name}/")}
 end
 
 if ARGV.count != 1
