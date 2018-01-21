@@ -92,7 +92,7 @@ module Slacker
     def get_csv(csv_file_path)
       CSV.read(configuration.expand_path("data/#{csv_file_path}"), {
           :headers => true,
-          :encoding => 'Windows-1252',
+          :encoding => 'UTF-8',
           :header_converters => lambda { |h| h.to_sym unless h.nil? }
       })
 
