@@ -85,6 +85,8 @@ EOF
           configure_db_odbc
         when TINYTDS_DRIVER
           configure_db_tiny_tds
+        else
+        	raise RuntimeError, "Unknown driver \"#{@configuration.db_driver}\" used in database configuration; Supported drivers: \"odbc\", \"tiny_tds\"."
       end
       configure_rspec
       configure_misc

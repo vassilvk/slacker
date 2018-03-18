@@ -1,9 +1,8 @@
 require 'csv'
+require 'time'
 
 module Slacker
-  DATE_FORMAT = "%m/%d/%Y"
-  DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
-
+  
   class QueryResultMatcher
     def initialize(golden_master)
       @golden_master = golden_master
@@ -100,13 +99,16 @@ module Slacker
       elsif master_val.kind_of?(String)
         case subject_val
         when ODBC::TimeStamp
-          (!!Time.strptime(master_val, DATE_FORMAT) rescue false) && Time.strptime(master_val, DATE_FORMAT) == ODBC::to_time(subject_val)
+        	# Convert master string value to date-time and compare.
+        	((subject_val_time = Time.parse(master_val)) rescue false) && subject_val_time == ODBC::to_time(subject_val)
+        # Time is the class returned by tiny_tds when the resultset includes datetime or time.
+        when Time
+        	# Convert master string value to date-time and compare.
+        	((subject_val_time = Time.parse(master_val)) rescue false) && subject_val_time == subject_val
         when Float
           (!!Float(master_val) rescue false) && Float(master_val) == subject_val
         when BigDecimal
           (!!BigDecimal(master_val) rescue false) && BigDecimal(master_val) == BigDecimal(subject_val)
-        when Time
-          (!!DateTime.strptime(DateTime.parse(master_val).to_s, DATETIME_FORMAT) rescue false) && DateTime.strptime(DateTime.parse(master_val).to_s, DATETIME_FORMAT) == DateTime.strptime(DateTime.parse(subject_val.to_s).to_s, DATETIME_FORMAT)
         else
           subject_val.to_s == master_val.to_s
         end
