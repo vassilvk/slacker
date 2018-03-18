@@ -99,12 +99,12 @@ module Slacker
       elsif master_val.kind_of?(String)
         case subject_val
         when ODBC::TimeStamp
-        	# Convert master string value to date-time and compare.
-        	((subject_val_time = Time.parse(master_val)) rescue false) && subject_val_time == ODBC::to_time(subject_val)
+          # Convert master string value to date-time and compare.
+          ((subject_val_time = Time.parse(master_val)) rescue false) && subject_val_time == ODBC::to_time(subject_val)
         # Time is the class returned by tiny_tds when the resultset includes datetime or time.
         when Time
-        	# Convert master string value to date-time and compare.
-        	((subject_val_time = Time.parse(master_val)) rescue false) && subject_val_time == subject_val
+          # Convert master string value to date-time and compare.
+          ((subject_val_time = Time.parse(master_val)) rescue false) && subject_val_time == subject_val
         when Float
           (!!Float(master_val) rescue false) && Float(master_val) == subject_val
         when BigDecimal
