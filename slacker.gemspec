@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.0.0'
  
   s.add_dependency 'bundler', '~> 1.0', '>= 1.0.15'
-  s.add_dependency 'ruby-odbc', '= 0.99998'
+  s.add_dependency 'ruby-odbc', '= 0.99999'
   s.add_dependency 'rspec', '~> 3.0'
   s.add_dependency 'tiny_tds', '~>2.0'
 end
