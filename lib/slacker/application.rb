@@ -165,7 +165,8 @@ EOF
                       :password => @configuration.db_password, 
                       :host => @configuration.db_server,
                       :database => @configuration.db_name,
-                      :port => @configuration.db_port
+                      :port => @configuration.db_port,
+                      :azure => @configuration.azure
                       
         @database.query_options[:symbolize_keys] = true
       rescue TinyTds::Error => e
