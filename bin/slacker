@@ -14,6 +14,8 @@ end
 
 # Preset the application to run on the console
 Slacker.configure do |config|
+  config.console_enabled = true
+
   # Setup the target connection based on the contents in database.yml
   db_config = db_config_from_file(config.expand_path('database.yml'))
 
