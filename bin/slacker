@@ -14,8 +14,6 @@ end
 
 # Preset the application to run on the console
 Slacker.configure do |config|
-  config.console_enabled = true
-
   # Setup the target connection based on the contents in database.yml
   db_config = db_config_from_file(config.expand_path('database.yml'))
 
@@ -25,8 +23,8 @@ Slacker.configure do |config|
   config.db_password = db_config["password"]
   config.db_port = db_config["port"] if !!db_config["port"] 
   config.db_driver = db_config["driver"] if !!db_config["driver"] 
-  # Override console_enabled value with the value from configuration yaml
-  config.console_enabled = db_config["console_enabled"] if db_config["console_enabled"] != nil
+  config.azure = db_config["azure"] if !!db_config["azure"]
+  config.console_enabled = db_config["console_enabled"] if !!db_config["console_enabled"]
 end
 
 if Slacker.application.run

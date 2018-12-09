@@ -7,6 +7,10 @@
 # See https://github.com/vassilvk/slacker/wiki/Slacker-Project#odbc-vs-tds for more information.
 driver: odbc
 
+# Enable connections to azure databases.
+# Applies only to tiny_tds driver.
+azure: false
+
 # Full instance name when using odbc; hostname or IP when using tiny_tds.
 server: my_server
 
