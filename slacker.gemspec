@@ -12,8 +12,6 @@ Gem::Specification.new do |s|
   s.description = %q{RSpec-based framework for developing automated tests for SQL Server}
   s.license = 'MIT'
 
-  s.rubyforge_project = "slacker"
-
   s.files = ['README.md', 'Rakefile', 'Gemfile', 'slacker.gemspec'] + Dir.glob("{bin,lib,spec}/**/*")
   s.test_files = Dir.glob("spec/**/*")
   s.executables = ['slacker', 'slacker_new']
