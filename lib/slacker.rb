@@ -50,7 +50,7 @@ module Slacker
 
       begin
         sql_template_path_stack.push(File.dirname(template_file_path))
-        result = render_text(IO.read(template_file_path, {:mode => 'r:BOM|UTF-8'}), options)
+        result = render_text(IO.read(template_file_path, :mode => 'r:BOM|UTF-8'), options)
       rescue => detail
         # Report errors in the template
         if detail.backtrace[0] =~ /^\(erb\)/
